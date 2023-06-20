@@ -9,4 +9,6 @@ class Store(models.Model):
     create_date = models.DateTimeField(auto_now_add=True)
     address = models.CharField(max_length=100)
     rate = models.DecimalField(max_digits=3, decimal_places=2, default=0.00)
+    rate_number = models.IntegerField(default=0)
+
 

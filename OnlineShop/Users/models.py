@@ -2,6 +2,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 from django.db import models
 import jwt 
 
+
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
         if not email:
@@ -10,6 +11,8 @@ class UserManager(BaseUserManager):
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
+        user = CustomUser.objects.get(email=email)
+        Basket.objects.create(user=user)
         return user
 
     def create_superuser(self, email, password=None, **extra_fields):
@@ -26,7 +29,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     profile_image = models.ImageField(upload_to='profile_images/', blank=True)
     birth_date = models.DateField(null=True, blank=True)
     create_date = models.DateTimeField(auto_now_add=True)
-
+    
     PERMISSION_CHOICES = (
         ('user', 'User'),
         ('moderator', 'Moderator'),
@@ -46,7 +49,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
     
-
+from Baskets.models import Basket
 
 class LogicUser:
     def get_user(request):

@@ -13,5 +13,5 @@ class StoreSerializer(serializers.ModelSerializer):
     owner = CustomUserSerializer(read_only=True)
     class Meta:
         model = Store
-        fields = ['id', 'owner', 'name', 'image', 'bio', 'create_date', 'address', 'rate']
+        fields = ['id', 'owner', 'name', 'image', 'bio', 'create_date', 'address', 'rate', 'rate_number']
         
