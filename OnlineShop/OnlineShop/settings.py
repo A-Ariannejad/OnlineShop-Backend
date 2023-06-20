@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'RateProduct',
     'RateStore',
     'CommentProduct',
-    'Baskets',
 ]
 
 MIDDLEWARE = [

@@ -12,7 +12,6 @@ class UserManager(BaseUserManager):
         user.set_password(password)
         user.save(using=self._db)
         user = CustomUser.objects.get(email=email)
-        Basket.objects.create(user=user)
         return user
 
     def create_superuser(self, email, password=None, **extra_fields):
@@ -55,7 +54,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
     
-from Baskets.models import Basket
 
 class LogicUser:
     def get_user(request):
