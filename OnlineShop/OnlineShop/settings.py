@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-5yokk*$1y*tn8m$%p)uey*ajp8w$7*(u9+b+ll^#krfz#*7fqi
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Application definition
 
@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'RateProduct',
     'RateStore',
     'CommentProduct',
+    'Baskets',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -55,6 +57,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'OnlineShop.urls'

@@ -8,6 +8,7 @@ from rest_framework import viewsets
 from django.contrib.auth.hashers import make_password, check_password
 import jwt
 from rest_framework.views import APIView
+from Baskets.models import Basket
 
 class IsUser(BasePermission):
     def has_permission(self, request, view):
@@ -45,6 +46,8 @@ class SignUpView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(password = make_password(self.request.data.get('password')))
+        user = CustomUser.objects.get(email=self.request.data.get('email'))
+        Basket.objects.create(user=user)
 
 class LoginView(generics.GenericAPIView):
     serializer_class = LoginCustomUserSerializer
