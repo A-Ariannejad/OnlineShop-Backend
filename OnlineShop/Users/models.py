@@ -1,4 +1,4 @@
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin, Group, Permission
 from django.db import models
 import jwt 
 
@@ -30,6 +30,12 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     birth_date = models.DateField(null=True, blank=True)
     create_date = models.DateTimeField(auto_now_add=True)
     
+    #################################################
+    groups = models.ManyToManyField(Group, related_name='custom_users')
+    user_permissions = models.ManyToManyField(Permission, related_name='custom_users')
+    #################################################
+
+
     PERMISSION_CHOICES = (
         ('user', 'User'),
         ('moderator', 'Moderator'),
