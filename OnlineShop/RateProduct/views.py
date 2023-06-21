@@ -9,7 +9,7 @@ from decimal import Decimal
 class RateProductViewSet(viewsets.ModelViewSet):
     queryset = RateProduct.objects.all()
     serializer_class = RateProductSerializer
-    permission_classes = [IsAdmin]
+    permission_classes = [IsUser]
 
 class RateProductCreateView(generics.CreateAPIView):
     permission_classes = [IsUser]

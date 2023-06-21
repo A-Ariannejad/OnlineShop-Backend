@@ -8,7 +8,7 @@ from .serializer import CommentProductCreateSerializer, CommentProductSerializer
 class CommentProductViewSet(viewsets.ModelViewSet):
     queryset = CommentProduct.objects.all()
     serializer_class = CommentProductSerializer
-    permission_classes = [IsAdmin]
+    permission_classes = [IsUser]
 
 class CommentProductCreateView(generics.CreateAPIView):
     permission_classes = [IsUser]

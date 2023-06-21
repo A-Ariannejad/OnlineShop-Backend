@@ -37,7 +37,7 @@ class IsAdmin(BasePermission):
 class CustomUserViewSet(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
-    permission_classes = [IsAdmin]
+    permission_classes = [IsUser]
     
 class SignUpView(generics.CreateAPIView):
     queryset = CustomUser.objects.all()
@@ -60,18 +60,12 @@ class LoginView(generics.GenericAPIView):
         
         if user and check_password(password, user.password):
             encoded_jwt = jwt.encode({"email": user.email}, "56s4fs8df4d8af4198h489r4hdy85k4du8l94k8g581d8f", algorithm="HS256")
-            response = Response("Login Successful", status=200)
+            response = Response({ "Token" : f"{encoded_jwt}" }, status=200)
             response.set_cookie('Token', encoded_jwt)
             return response
         else:
             return Response("Login Failed", status=401)
 
-class LogoutView(APIView):
-    permission_classes = [IsUser]
 
-    def get(self, request):
-        response = Response("Logout Successful", status=204)
-        response.delete_cookie('Token')
-        return response
 
 

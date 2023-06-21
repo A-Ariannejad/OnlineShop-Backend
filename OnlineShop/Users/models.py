@@ -59,11 +59,6 @@ from Baskets.models import Basket
 
 class LogicUser:
     def get_user(request):
-        if 'Token' in request.COOKIES:
-            token = request.COOKIES['Token']
-            dec = jwt.decode(token , key="56s4fs8df4d8af4198h489r4hdy85k4du8l94k8g581d8f", algorithms="HS256")
-            if 'email' in dec:
-                email = dec['email']
-                user = CustomUser.objects.filter(email=email).first()
-                if user:
-                    return user
+        email = request.user.email
+        user = CustomUser.objects.get(email=email)
+        return user

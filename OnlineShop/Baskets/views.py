@@ -7,8 +7,11 @@ from Users.views import IsUser, IsAdmin
 from Users.models import LogicUser
 from .models import Basket, BasketMTMProduct
 from Products.models import Product
+from Products.serializer import ProductSerializer
 from .serializer import BasketSerializer, BasketAddProductSerializer, BasketRemoveProductSerializer, BasketMTMProductSerializer
 from rest_framework import generics, permissions
+from django.forms.models import model_to_dict
+
 
 class Calculate:
     def price_calculate(bp):
@@ -22,31 +25,6 @@ class BasketView(viewsets.ModelViewSet):
     queryset = Basket.objects.all()
     serializer_class = BasketSerializer
     permission_classes = [IsAdmin]
-
-    def list(self, request):
-        baskets = Basket.objects.filter().all()
-        serializer = BasketSerializer(baskets, many=True)
-        temp = serializer.data
-        for x in temp:
-            for y in list(x['products']):
-                product = Product.objects.get(id=y)
-                basket = Basket.objects.get(id=x['id'])
-                bmtmp = BasketMTMProduct.objects.filter(basket=basket, product=product).first()
-                y = BasketMTMProductSerializer(data=bmtmp)
-                y.is_valid()
-                print(y)
-                # serializer = BasketMTMProductSerializer(data=basket_mtm_product_instance_data)
-                # if serializer.is_valid():
-                    
-                #     quantity = serializer.get('quantity')
-                #     print(quantity)
-                # else:
-                #     errors = serializer.errors
-                
-                
-                # temp=y.data
-        return Response ( temp )
-
 
 
 class BasketAddProductView(APIView):

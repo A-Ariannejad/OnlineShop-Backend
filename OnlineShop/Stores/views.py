@@ -8,7 +8,7 @@ from .serializer import StoreCreateSerializer, StoreSerializer
 class StoreViewSet(viewsets.ModelViewSet):
     queryset = Store.objects.all()
     serializer_class = StoreSerializer
-    permission_classes = [IsAdmin]
+    permission_classes = [IsUser]
 
 class StoreCreateView(generics.CreateAPIView):
     permission_classes = [IsUser]
