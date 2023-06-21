@@ -9,11 +9,12 @@ class BasketMTMProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = BasketMTMProduct
         fields = ['id', 'basket', 'product', 'quantity']
+        read_only_fields = ['id', 'basket']
 
 
 class BasketSerializer(serializers.ModelSerializer):
     user = CustomUserSerializer(read_only=True)
-    products = ProductSerializer(many=True)
+    products = BasketMTMProductSerializer(source='ps', many=True)
     class Meta:
         model = Basket
         fields = ['id', 'user', 'products', 'total_price', 'order_address']

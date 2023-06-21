@@ -29,7 +29,7 @@ class BasketView(viewsets.ModelViewSet):
 
 class BasketAddProductView(APIView):
     serializer_class = BasketAddProductSerializer
-    permission_classes = [IsUser]
+    #permission_classes = [IsUser]
 
     def post(self, request):
         try:
@@ -38,7 +38,7 @@ class BasketAddProductView(APIView):
         except Basket.DoesNotExist:
             return Response({'error': 'Basket does not exist.'}, status=status.HTTP_404_NOT_FOUND)
 
-        serializer = BasketAddProductSerializer(data=request.data, many=True)
+        serializer = BasketAddProductSerializer(data=request.data)
         if serializer.is_valid():
             product_id = self.request.data['product_id']
             quantity = self.request.data['quantity']
@@ -56,7 +56,7 @@ class BasketAddProductView(APIView):
             
             return Response(status=status.HTTP_200_OK)
 
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
 
 class BasketRemoveProductView(APIView):

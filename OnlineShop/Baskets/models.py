@@ -11,8 +11,8 @@ class Basket(models.Model):
     order_address = models.TextField(max_length=100, default="Post Office")
 
 class BasketMTMProduct(models.Model):
-    basket = models.ForeignKey(Basket, on_delete=models.CASCADE, related_name='baskets')
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='products')
+    basket = models.ForeignKey(Basket, on_delete=models.CASCADE, related_name='ps')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='ps')
     quantity = models.IntegerField(default=1)
 
 
