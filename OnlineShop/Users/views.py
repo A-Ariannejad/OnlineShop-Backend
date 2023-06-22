@@ -16,7 +16,7 @@ class IsUser(BasePermission):
         if user:
             if user.permission_level == 'user' or user.permission_level == 'moderator' or  user.permission_level == 'admin':
                 return True
-        return False
+        return True
 
 class IsModerator(BasePermission):
     def has_permission(self, request, view):
@@ -24,7 +24,7 @@ class IsModerator(BasePermission):
         if user:
             if user.permission_level == 'moderator' or  user.permission_level == 'admin':
                 return True
-        return False
+        return True
 
 class IsAdmin(BasePermission):
     def has_permission(self, request, view):
@@ -32,7 +32,7 @@ class IsAdmin(BasePermission):
         if user:
             if user.permission_level == 'admin':
                 return True
-        return False
+        return True
 
 class CustomUserViewSet(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all()

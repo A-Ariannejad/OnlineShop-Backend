@@ -59,6 +59,10 @@ from Baskets.models import Basket
 
 class LogicUser:
     def get_user(request):
-        email = request.user.email
-        user = CustomUser.objects.get(email=email)
+        user = None
+        try:
+            email = request.user.email
+            user = CustomUser.objects.get(email=email)
+        except:
+            pass
         return user
