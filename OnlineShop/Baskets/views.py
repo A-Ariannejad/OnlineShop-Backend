@@ -24,7 +24,7 @@ class Calculate:
 class BasketView(viewsets.ModelViewSet):
     queryset = Basket.objects.all()
     serializer_class = BasketSerializer
-    permission_classes = [IsAdmin]
+    permission_classes = [IsUser]
 
 
 class BasketAddProductView(APIView):
