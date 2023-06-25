@@ -21,6 +21,17 @@ class Calculate:
                 temp += (float)(x.product.price)
         return temp
     
+
+class BasketShowView(generics.RetrieveAPIView):
+    permission_classes = [IsUser]
+    queryset = Basket.objects.all()
+    serializer_class = BasketSerializer
+    def get(self, request):
+        user = LogicUser.get_user(request)
+        basket = Basket.objects.get(user=user)
+        s = BasketSerializer(basket)
+        return Response(s.data, status=status.HTTP_200_OK)
+    
 class BasketView(viewsets.ModelViewSet):
     queryset = Basket.objects.all()
     serializer_class = BasketSerializer
