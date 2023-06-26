@@ -1,8 +1,9 @@
-from rest_framework import generics, viewsets, filters
+from rest_framework import generics, viewsets, filters, status
 from Users.views import IsUser, IsAdmin
 from Stores.models import Store
 from .models import Product
 from .serializer import ProductCreateSerializer, ProductSerializer
+from rest_framework.response import Response
 
 
 class ProductShowView(generics.RetrieveAPIView):
@@ -56,3 +57,17 @@ class ProductCategoriesView(generics.ListAPIView):
             queryset = queryset.filter(type__icontains=type_input)
         queryset = queryset.filter(price__range=(L_price_input, U_price_input))
         return queryset
+
+
+class ShowProductByStoreViewSet(generics.RetrieveAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    permission_classes = [IsUser]
+
+    def get(self, serializer, *args, **kwargs):
+        id = self.kwargs.get('pk')
+        store = Store.objects.get(id=id)
+        products = Product.objects.filter(store=store).all()
+        serializers = ProductSerializer(products, many=True)
+
+        return Response(serializers.data, status=status.HTTP_200_OK)
