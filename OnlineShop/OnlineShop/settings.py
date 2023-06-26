@@ -34,10 +34,11 @@ DEBUG = True
 AUTH_USER_MODEL = 'Users.CustomUser'
 
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['http://localhost:3000','http://127.0.0.1:3000','https://online-shop-fronted.vercel.app']
+CSRF_TRUSTED_ORIGINS = ['http://localhost:3000','http://127.0.0.1:3000','https://76.76.21.22:443']
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_PRIVATE_NETWORK = True
+
 
 CORS_ALLOW_METHODS = (
     "DELETE",
