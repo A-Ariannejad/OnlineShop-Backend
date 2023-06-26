@@ -34,11 +34,11 @@ DEBUG = True
 AUTH_USER_MODEL = 'Users.CustomUser'
 
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['http://localhost:3000','http://127.0.0.1:3000','https://76.76.21.22:443']
+CSRF_TRUSTED_ORIGINS = ['http://localhost:3000','http://127.0.0.1:3000','https://online-shop-fronted.vercel.app/']
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_PRIVATE_NETWORK = True
-
+SECURE_SSL_REDIRECT = True
 
 CORS_ALLOW_METHODS = (
     "DELETE",
@@ -84,6 +84,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
