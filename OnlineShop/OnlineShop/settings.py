@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from datetime import timedelta
+import os
 from pathlib import Path
 
 from django.conf import settings
@@ -18,6 +19,8 @@ from django.conf import settings
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -31,11 +34,11 @@ DEBUG = True
 AUTH_USER_MODEL = 'Users.CustomUser'
 
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['http://localhost:3000','http://127.0.0.1:3000']
+CSRF_TRUSTED_ORIGINS = ['http://localhost:3000','http://127.0.0.1:3000','http://141.11.107.63:3000']
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_PRIVATE_NETWORK = True
-
+# SECURE_SSL_REDIRECT = True
 
 CORS_ALLOW_METHODS = (
     "DELETE",
@@ -81,6 +84,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
+    # 'django_extensions',
 ]
 
 MIDDLEWARE = [
