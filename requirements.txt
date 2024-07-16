@@ -2,7 +2,7 @@ asgiref==3.7.2
 astroid==2.15.5
 colorama==0.4.6
 dill==0.3.6
-Django==4.2.2
+Django==4.2.14
 django-cors-headers==4.1.0
 django-rest-framework==0.1.0
 djangorestframework==3.14.0
